@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'core/css/main.css' %}">
+    <title>{% block title %}YourCompany{% endblock %}</title>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+    {% block navbar %}
+        {% include "core/components/navbar.html" %}
+    {% endblock %}
+
+    <main>
+        {% block content %}
+        {% include "core/components/hero.html" %}
+
+        {% endblock %}
+    </main>
+
+    {% block footer %}
+        {% include "core/components/footer.html" %}
+    {% endblock %}
+
+</body>
+
+</html>

@@ -1,0 +1,13 @@
+body {
+    background-color: #a6a6af;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    color: rgb(10, 10, 70);
+}
+
+ul {
+    list-style-type: square;
+    color: green;
+}

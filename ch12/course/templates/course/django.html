@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %} <!-- very important -->
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django Template Filters</title>
+    <link rel="stylesheet" href="{% static 'course/style.css' %}">
+
+</head>
+
+<body>
+    <h1>name: {{ n }}</h1>
+
+    <h2>Filters</h2>
+    <h3>duration (upper): {{ d|upper }}</h3>
+    <h3>duration (capfirst): {{ d|capfirst }}</h3>
+    <h3>duration (slice:'2'): {{ d|slice:'2' }}</h3>
+    <h3>duration (length): {{ d|length }}</h3>
+    <h3>duration (truncatechars:3): {{ d|truncatechars:3 }}</h3>
+
+    {% if n|length >= 4 %}
+    <h3>Name: {{ n }}</h3>
+    {% endif %}
+
+    <h2>For Loop Example</h2>
+    <ul>
+        {% for item in items %}
+        <li>{{ forloop.counter }} - {{ item|capfirst }}</li>
+        {% empty %}
+        <li>No items found.</li>
+        {% endfor %}
+    </ul>
+    <h1>Hello, {{ n }}</h1>
+
+    <h2>Student Details</h2>
+    <ul>
+        {% for key, value in student.items %}
+        <li>{{ key|capfirst }} : {{ value }}</li>
+        {% endfor %}
+    </ul>
+    <script src="{% static 'course/script.js' %}"></script>
+
+</body>
+
+</html>

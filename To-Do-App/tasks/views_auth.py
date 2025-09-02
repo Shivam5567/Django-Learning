@@ -11,7 +11,6 @@ class SignUpView(CreateView):
     success_url = reverse_lazy("task_list")
 
     def form_valid(self, form):
-        # Save user and log them in automatically
         user = form.save()
         login(self.request, user)
         messages.success(self.request, "Account created successfully! 🎉")

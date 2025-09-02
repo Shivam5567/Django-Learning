@@ -17,7 +17,7 @@ MESSAGE_TAGS = {
     messages.DEBUG: 'secondary',
     messages.INFO: 'info',
     messages.SUCCESS: 'success',
-    messages.WARNING: 'warning',
+    messages.WARNING: 'warn',
     messages.ERROR: 'danger',
 }
 
@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'tasks',
+    "tasks",
+    'rest_framework'
 ]
 
 MIDDLEWARE = [

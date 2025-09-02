@@ -1,22 +1,23 @@
-from django.urls import path
-from django.contrib.auth import views as auth_views
-from .views import (   # <-- import CBV views
-    TaskListView,
-    TaskCreateView,
-    TaskUpdateView,
-    TaskDeleteView,
-)
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views_api import TaskViewSet
+from . import views
 from .views_auth import SignUpView
+from django.contrib.auth import views as auth_views
+
+# REST API routing
+router = DefaultRouter()
+router.register(r'api/tasks', TaskViewSet, basename="task")
 
 urlpatterns = [
-    # Tasks
-    path("", TaskListView.as_view(), name="task_list"),
-    path("create/", TaskCreateView.as_view(), name="task_create"),
-    path("update/<int:pk>/", TaskUpdateView.as_view(), name="task_update"),
-    path("delete/<int:pk>/", TaskDeleteView.as_view(), name="task_delete"),
-
-    # Auth
+    path("", views.TaskListView.as_view(), name="task_list"),
+    path("create/", views.TaskCreateView.as_view(), name="task_create"),
+    path("update/<int:pk>/", views.TaskUpdateView.as_view(), name="task_update"),
+    path("delete/<int:pk>/", views.TaskDeleteView.as_view(), name="task_delete"),
     path("signup/", SignUpView.as_view(), name="signup"),
     path("login/", auth_views.LoginView.as_view(template_name="tasks/login.html"), name="login"),
-    path("logout/", auth_views.LogoutView.as_view(next_page="login"), name="logout"),
+    path("logout/", auth_views.LogoutView.as_view(), name="logout"),
+
+    # default api
+    path("", include(router.urls)),
 ]

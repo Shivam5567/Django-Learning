@@ -1,14 +1,18 @@
+from django.views.generic import CreateView
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
-from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
+from django.contrib import messages
 
-def signup_view(request):
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)
-            return redirect('task_list')
-    else:
-        form = UserCreationForm()
-    return render(request, 'tasks/signup.html', {'form': form})
+
+class SignUpView(CreateView):
+    form_class = UserCreationForm
+    template_name = "tasks/signup.html"
+    success_url = reverse_lazy("task_list")
+
+    def form_valid(self, form):
+        # Save user and log them in automatically
+        user = form.save()
+        login(self.request, user)
+        messages.success(self.request, "Account created successfully! 🎉")
+        return super().form_valid(form)
